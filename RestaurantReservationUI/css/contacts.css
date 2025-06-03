@@ -1,0 +1,52 @@
+.contacts__inner-title {
+    font-size: 20px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: normal;
+}
+
+.contacts__inner-description {
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    margin-top: 20px;
+}
+
+.contact__social {
+    margin-top: 20px;
+}
+
+.contact__social-link {
+    margin-top: 20px;
+}
+
+.contacts__inner-description span {
+    padding-left: 10px;
+}
+
+.contact__social-link span{
+    padding-left: 10px;
+}
+
+.contacts__inner-description i {
+    font-size: 16px;
+    color: #F4A460;
+    margin-right: 10px;
+}
+
+.contact__social-link-facebook i {
+    font-size: 20px;
+    color: #3b5998 ;
+}
+
+.contact__social-link-linkedin i {
+    font-size: 20px;
+    color: #0e76a8;
+}
+
+.contact__social-link-github i {
+    font-size: 20px;
+    color: #171515;
+}
+
+.footer__info-contacts {
+    margin-top: 20! important;
+}

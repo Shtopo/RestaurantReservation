@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/contacts.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="menu--close"></div>
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="header__inner-logo">
+                    <img src="/img/logo.png" alt="restaurant">
+                </a>
+                <nav class="header__nav">
+                    <button class="header__nav-btn" aria-label="Toggle navigation">
+                        <span class="header__nav-icon"></span>
+                        <span class="header__nav-icon"></span>
+                        <span class="header__nav-icon"></span>
+                        <span class="header__nav-icon"></span>
+                    </button>
+                    <ul class="header__nav-list">
+                        <li class="header__nav-close">
+                            <button class="header__nav-close-btn" aria-label="Close navigation">
+                                <img src="/img/close.svg" alt="Close Icon">
+                            </button>
+                        </li>
+                        <li class="header__nav-item"><a class="header__nav-link booking" href="index.html">Забронювати стіл</a></li>
+                        <li class="header__nav-item"><a class="header__nav-link tables" href="index.html">Розміщення столів</a></li>
+                        <li class="header__nav-item"><a class="header__nav-link" href="сontacts.html">Контакти</a></li>                        
+                    </ul>
+                </nav>
+                <ul class="header__user">
+                    <li class="header__user-item">
+                        <a class="header__user-link" href="login.html">
+                            <img src="img/user.svg" alt="User Icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <blockquote class="blockquote about__blockquote">
+            <p class="blockquote__text">
+                Ми прагнемо забезпечити найкращий сервіс для наших гостей. 
+                Ми завжди раді вітати вас!
+            </p>
+        </blockquote>
+        <section id="home" class="about">
+            <div class="container">
+                <div class="about__inner">
+                    <p class="about__inner-description">
+                        Наш ресторан пропонує зручну систему <span>онлайн-бронювання</span>, щоб ви могли легко вибрати місце для незабутнього вечора.
+                    </p>
+                    <p class="about__inner-description">
+                        Завдяки інтуїтивно зрозумілому <span>інтерфейсу</span>, ви можете переглянути <span>доступні столи</span>, їхнє розташування та забронювати найкраще місце.
+                    </p>
+                    <p class="about__inner-description">
+                        Ми гарантуємо <span>комфорт</span>, <span>якість</span> та <span>швидкість обслуговування</span>, щоб зробити ваш відпочинок максимально приємним!
+                    </p>
+                    <h2 class="top__inner-subtitle">Наші переваги:</h2>
+                    <ul class="about__inner-list">
+                        <li class="about__inner-list-item">
+                            <i class="fa-solid fa-circle-check"></i> Швидке онлайн-бронювання
+                        </li>
+                        <li class="about__inner-list-item">
+                            <i class="fa-solid fa-circle-check"></i> Актуальна інформація про доступні столи
+                        </li>
+                        <li class="about__inner-list-item">
+                            <i class="fa-solid fa-circle-check"></i> Зручний вибір місця в ресторані
+                        </li>
+                        <li class="about__inner-list-item">
+                            <i class="fa-solid fa-circle-check"></i> Якісне обслуговування та затишна атмосфера
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+        <footer class="footer">
+        <div class="container">
+            <p class="footer__info">© 2025 Сервіс бронювання столів. Всі права захищені.</p>
+        </div>
+    </footer>
+
+</div>
+    <script src="/js/main.js"></script>
+</body>
+</html>

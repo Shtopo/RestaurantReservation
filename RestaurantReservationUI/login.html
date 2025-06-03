@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/contacts.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="menu--close"></div>
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="header__inner-logo">
+                    <img src="/img/logo.png" alt="restaurant">
+                </a>
+                <nav class="header__nav">
+                    <button class="header__nav-btn" aria-label="Toggle navigation">
+                        <span class="header__nav-icon"></span>
+                        <span class="header__nav-icon"></span>
+                        <span class="header__nav-icon"></span>
+                        <span class="header__nav-icon"></span>
+                    </button>
+                    <ul class="header__nav-list">
+                        <li class="header__nav-close">
+                            <button class="header__nav-close-btn" aria-label="Close navigation">
+                                <img src="/img/close.svg" alt="Close Icon">
+                            </button>
+                        </li>
+                        <li class="header__nav-item"><a class="header__nav-link booking" href="index.html">Забронювати стіл</a></li>
+                        <li class="header__nav-item"><a class="header__nav-link tables" href="#">Розміщення столів</a></li>
+                        <li class="header__nav-item"><a class="header__nav-link" href="about.html">Про нас</a></li>
+                        <li class="header__nav-item"><a class="header__nav-link" href="сontacts.html">Контакти</a></li>                        
+                    </ul>
+                </nav>
+                <ul class="header__user">
+                    <li class="header__user-item">
+                        <a class="header__user-link" href="login.html">
+                            <img src="img/user.svg" alt="User Icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content login-content">
+        <section id="home" class="login">          
+            <div class="container">
+                <div class="login__form-wrapper">
+                    <div class="login__inner">
+                        <div class="login__form">
+                            <h2 class="login__form-title">
+                                Вхід до системи
+
+                            </h2>
+                            <form action="">
+                                <div class="login__form-inputs">
+                                    <input type="text" class="login__form-input" placeholder="Ім'я користувача" required>
+                                    <img src="/img/user.svg" alt="user icon" class="login__form-icon">
+                                </div>
+                                <div class="login__form-inputs">
+                                    <input type="password" class="login__form-input" placeholder="Пароль" required>
+                                    <img src="/img/lock.svg" alt="password-icon" class="login__form-icon login__form-icon--password">
+                                </div>
+                                <label class="login__form-remember"><input type="checkbox">Замам'ятати мене</label>
+                                <div class="login__form-inputs">
+                                    <input type="submit" value="Увійти" class="login__form-input login__form-button" placeholder="Пароль" required>
+                                </div>
+                            </form>
+                            <p class="login__form-text">Нагадати <a href="#">пароль</a></p>
+                            <p class="login__form-text">Створити <a href="register.html">акаунт</a></p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </section>
+    </main>
+    <blockquote class="blockquote footer__blockquote">
+            <p class="blockquote__text">
+                Наші соціальні мережі
+            </p>
+    </blockquote>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__social">
+                <div class="footer__icon">
+                    <a href="https://www.facebook.com/artem.gengeley" target="_blank" class="footer__icon-link link-1"><i class="fa-brands fa-facebook"></i></a>
+                    <span>Facebook</span>
+                </div>
+                <div class="footer__icon">
+                    <a href="https://www.linkedin.com/in/artem-zhenzhelei/" target="_blank" class="footer__icon-link link-2"><i class="fa-brands fa-linkedin"></i></a>
+                    <span>Linkedin</span>
+                </div>
+                <div class="footer__icon">
+                    <a href="https://github.com/Shtopo/FilmsLibrary" target="_blank" class="footer__icon-link link-3"><i class="fa-brands fa-github"></i></a>
+                    <span>github</span>
+                </div>
+                <div class="footer__icon">
+                    <a href="mailto:Shtopo1989@gmail.com" target="_blank" class="footer__icon-link link-4"><i class="fa-brands fa-google"></i></a>
+                    <span>Email</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+    <script src="/js/main.js"></script>
+</body>
+</html>
