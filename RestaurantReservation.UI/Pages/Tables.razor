@@ -1,0 +1,56 @@
+﻿#nullable enable
+@page "/tables"
+@inject HttpClient Http
+@using RestaurantReservation.UI.Models;
+@using RestaurantReservation.UI.Services
+@using System.Net.Http.Json;
+@inject ApiService ApiService
+
+
+<h3>Бронювання столів</h3>
+
+@if (tables == null)
+{
+    <p>Завантаження...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Номер стола</th>
+                <th>Статус</th>
+                <th>Дія</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var table in tables)
+            {
+                <tr>
+                    <td>@table.Number</td> <!-- Changed from @table.Id to @table.Number -->
+                    <td>@table.Number</td>
+                    <td>@(table.IsAvailable ? "Вільний" : "Заброньований")</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => BookTable(table.Number)">Забронювати</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Table>? tables;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tables = await Http.GetFromJsonAsync<List<Table>>("http://localhost:5001/api/tables/AllTables");
+    }
+
+    private async Task BookTable(int tableNumber)
+    {
+        await Http.PostAsync($"http://localhost:5121/api/tables/book/{tableNumber}", null);
+        tables!.Find(t => t.Number == tableNumber)!.IsAvailable = false;
+    }
+}

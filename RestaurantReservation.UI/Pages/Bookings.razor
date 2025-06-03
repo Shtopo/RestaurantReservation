@@ -1,0 +1,45 @@
+﻿@using RestaurantReservation.UI.Models
+@using System.Net.Http.Json
+
+@page "/bookings"
+@inject HttpClient Http
+
+<h3>Бронювання</h3>
+
+@if (bookings == null)
+{
+    <p>Завантаження...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Клієнт</th>
+                <th>Дата</th>
+                <th>Столик</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in bookings)
+            {
+                <tr>
+                    <td>@booking.Id</td>
+                    <td>@booking.CustomerName</td>
+                    <td>@booking.BookingTime</td>
+                    <td>@booking.TableId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Booking>? bookings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        bookings = await Http.GetFromJsonAsync<List<Booking>>("http://localhost:5001/api/bookings/AllBookings");
+    }
+}
