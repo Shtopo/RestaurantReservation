@@ -10,7 +10,6 @@ namespace RestaurantReservation.API.Controllers
 {
     [ApiController]
     [Route("Users")]
-    [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -30,7 +29,7 @@ namespace RestaurantReservation.API.Controllers
             return Ok(userId);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetUser([FromQuery] int userId)
         {
@@ -42,6 +41,7 @@ namespace RestaurantReservation.API.Controllers
             return Ok(user);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllUsers")]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
@@ -50,6 +50,7 @@ namespace RestaurantReservation.API.Controllers
             return users.Any() ? Ok(users) : NotFound();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("RenameUser")]
         public async Task<IActionResult> RenameUser([FromQuery] int userId, [FromQuery] string newName)
         {
@@ -58,6 +59,7 @@ namespace RestaurantReservation.API.Controllers
             return user is not null ? Ok(user) : NotFound("Користувача не знайдено");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> DeleteUser([FromQuery] int userId)
         {
