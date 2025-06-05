@@ -38,7 +38,7 @@ namespace RestaurantReservation.API.Controllers
             return Ok(new { token, userId });
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetUser([FromQuery] int userId)
         {
