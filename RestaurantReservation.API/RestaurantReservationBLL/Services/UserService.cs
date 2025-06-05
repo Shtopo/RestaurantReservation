@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.Data;
+﻿using BCrypt.Net;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantReservation.API.Data;
+using RestaurantReservation.API.DTOs;
 using RestaurantReservation.API.Entities;
 using RestaurantReservation.API.RestaurantReservationBLL.Abstractions;
-using BCrypt.Net;
 
 
 namespace RestaurantReservation.API.RestaurantReservationBLL.Services
@@ -19,7 +20,7 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
             _tokenProvider = tokenProvider;
         }
 
-        public async Task<int> CreateUserAsync(string userName, string email, string password)
+        public async Task<int> RegisterAsync(string userName, string email, string password)
         {
             var user = new User
             {
@@ -33,7 +34,6 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
             await _context.SaveChangesAsync();
             return user.Id;
         }
-
 
         public async Task<User?> GetUserAsync(int userId)
         {
@@ -118,7 +118,6 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
             await _context.SaveChangesAsync();
             return true;
         }
-
 
     }
 }

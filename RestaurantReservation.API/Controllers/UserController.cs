@@ -21,18 +21,21 @@ namespace RestaurantReservation.API.Controllers
             _userService = userService;
         }
 
-        [HttpPost("CreateUser")]
+        [HttpPost("Register")]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+        public async Task<IActionResult> Register([FromBody] CreateUserRequest request)
         {
-            var userId = await _userService.CreateUserAsync(request.UserName, request.Email, request.Password);
+            var userId = await _userService.RegisterAsync(request.UserName, request.Email, request.Password);
 
-            var token = await _userService.GetTokenAsync(new LoginRequest
-            {
-                Email = request.Email,
-                Password = request.Password
-            });
-            return Ok(token);
+            var token = await _userService.GetTokenAsync(
+                new LoginRequest
+                {
+                    Email = request.Email,
+                    Password = request.Password
+                }
+            );
+
+            return Ok(new { token, userId });
         }
 
         [Authorize(Roles = "Admin")]
