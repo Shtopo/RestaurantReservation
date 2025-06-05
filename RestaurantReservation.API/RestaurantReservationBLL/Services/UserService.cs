@@ -96,19 +96,6 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public async Task<int> RegisterUserAsync(string userName, string email, string password, bool isAdmin)
-        {
-            var user = new User
-            {
-                Name = userName,
-                Email = email,
-                Role = isAdmin ? "Admin" : "User"
-            };
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user.Id;
-        }
         public async Task<bool> PromoteToAdminAsync(int userId)
         {
             var user = await _context.Users.FindAsync(userId);
