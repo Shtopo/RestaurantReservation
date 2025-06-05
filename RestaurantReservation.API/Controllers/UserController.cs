@@ -26,7 +26,13 @@ namespace RestaurantReservation.API.Controllers
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
         {
             var userId = await _userService.CreateUserAsync(request.UserName, request.Email, request.Password);
-            return Ok(userId);
+
+            var token = await _userService.GetTokenAsync(new LoginRequest
+            {
+                Email = request.Email,
+                Password = request.Password
+            });
+            return Ok(token);
         }
 
         [Authorize(Roles = "Admin")]
