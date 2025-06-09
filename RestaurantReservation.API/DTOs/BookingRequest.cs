@@ -8,6 +8,7 @@ namespace RestaurantReservation.API.DTOs
         public required string CustomerName { get; set; }
 
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Дата й час обов’язкові")]
         public DateTime? BookingTime { get; set; }
 
         [Required]

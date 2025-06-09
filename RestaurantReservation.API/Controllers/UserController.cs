@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.API.Data;
+using RestaurantReservation.API.DTOs;
 using RestaurantReservation.API.Entities;
 using RestaurantReservation.API.RestaurantReservationBLL.Abstractions;
 using RestaurantReservation.API.RestaurantReservationBLL.Services;
-using RestaurantReservation.API.DTOs;
+using System.Security.Claims;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -42,12 +43,16 @@ namespace RestaurantReservation.API.Controllers
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetUser([FromQuery] int userId)
         {
+            var claimId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (claimId == null) return Unauthorized();
+
+            var currentUserId = int.Parse(claimId);
+
+            if (!User.IsInRole("Admin") && currentUserId != userId)
+                return Forbid();
+
             var user = await _userService.GetUserAsync(userId);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
+            return user == null ? NotFound() : Ok(user);
         }
 
         [Authorize(Roles = "Admin")]
@@ -55,7 +60,6 @@ namespace RestaurantReservation.API.Controllers
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
             var users = await _userService.GetAllUsersAsync();
-
             return users.Any() ? Ok(users) : NotFound();
         }
 

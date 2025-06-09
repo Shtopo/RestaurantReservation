@@ -31,7 +31,7 @@ namespace RestaurantReservation.API.Controllers
             if (!request.BookingTime.HasValue)
                 return BadRequest("Дата бронювання обов'язкова!");
 
-            // ✅ Проверяем, есть ли авторизованный пользователь
+            // Перевіряємо чи є зареестрований користувач
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             int? userId = userIdClaim != null ? int.Parse(userIdClaim) : null;
 
