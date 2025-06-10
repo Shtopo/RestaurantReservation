@@ -6,6 +6,7 @@ using RestaurantReservation.API.Data;
 using RestaurantReservation.API.DTOs;
 using RestaurantReservation.API.Entities;
 using RestaurantReservation.API.RestaurantReservationBLL.Abstractions;
+using System.Security.Cryptography;
 
 
 namespace RestaurantReservation.API.RestaurantReservationBLL.Services
@@ -14,10 +15,12 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
     {
         private readonly AppDbContext _context;
         private readonly ITokenProvider _tokenProvider;
-        public UserService(AppDbContext context, ITokenProvider tokenProvider)
+        private readonly IEmailService _emailService;
+        public UserService(AppDbContext context, ITokenProvider tokenProvider, IEmailService emailService)
         {
             _context = context;
             _tokenProvider = tokenProvider;
+            _emailService = emailService;
         }
 
         public async Task<int> RegisterAsync(string userName, string email, string password)
@@ -84,6 +87,47 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
 
             var token = _tokenProvider.GenerateToken(user.Id, user.Role);
             return token;
+        }
+
+        public async Task<bool> RequestPasswordResetAsync(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                return true;
+            }
+
+            var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+
+            user.PasswordResetToken = token;
+            user.ResetTokenExpires = DateTime.UtcNow.AddHours(1);
+
+            await _context.SaveChangesAsync();
+
+            var resetLink = $"https://shtopo.github.io/index.html/reset-password.html?token={token}";
+
+            var emailBody = $"Для скидання пароля, будь ласка, перейдіть за посиланням: <a href='{resetLink}'>{resetLink}</a>";
+            await _emailService.SendEmailAsync(user.Email, "Скидання паролю", emailBody);
+
+            return true;
+        }
+
+        public async Task<bool> ResetPasswordAsync(string token, string newPassword)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u =>
+                u.PasswordResetToken == token && u.ResetTokenExpires > DateTime.UtcNow);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.PasswordHash = HashPassword(newPassword);
+            user.PasswordResetToken = null;
+            user.ResetTokenExpires = null;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         private bool VerifyPassword(string password, string passwordHash)

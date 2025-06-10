@@ -93,5 +93,33 @@ namespace RestaurantReservation.API.Controllers
             return Ok("Користувач став адміністратором");
         }
 
+        [HttpPost("ForgotPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        {
+            await _userService.RequestPasswordResetAsync(request.Email);
+
+            return Ok(new { message = "Якщо обліковий запис із таким email існує, на нього було надіслано посилання для скидання пароля." });
+        }
+
+        [HttpPost("ResetPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            if (request.NewPassword != request.ConfirmPassword)
+            {
+                return BadRequest("Паролі не збігаються.");
+            }
+
+            var result = await _userService.ResetPasswordAsync(request.Token, request.NewPassword);
+
+            if (result)
+            {
+                return Ok(new { message = "Пароль успішно скинуто." });
+            }
+
+            return BadRequest("Недійсний або прострочений токен.");
+        }
+
     }
 }

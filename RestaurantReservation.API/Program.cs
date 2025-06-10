@@ -47,6 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<ITableService, TableService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 
@@ -109,7 +110,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-//œ–»Ã≈Õ»“‹ Ã»√–¿÷»» œ–» —“¿–“≈
+//«¿—“Œ—”¬¿“» Ã≤√–¿÷≤Ø œ≤ƒ ◊¿— —“¿–“”
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();

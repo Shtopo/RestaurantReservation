@@ -11,5 +11,7 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Abstractions
         Task<User?> RenameUserAsync(int userId, string newName);
         Task<bool> DeleteUserAsync(int userId);     
         Task<bool> PromoteToAdminAsync(int userId);
+        Task<bool> RequestPasswordResetAsync(string email);
+        Task<bool> ResetPasswordAsync(string token, string newPassword);
     }
 }

@@ -15,5 +15,9 @@ namespace RestaurantReservation.API.Entities
         public string Role { get; set; } = "User";
 
         public string PasswordHash { get; set; }
+
+        public string? PasswordResetToken { get; set; }
+
+        public DateTime? ResetTokenExpires { get; set; }
     }
 }
