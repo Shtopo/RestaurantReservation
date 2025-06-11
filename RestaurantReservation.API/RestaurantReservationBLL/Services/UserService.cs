@@ -34,7 +34,8 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
             };
 
             _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
+            Console.WriteLine($"SaveChangesAsync result: {result}");
             return user.Id;
         }
 
