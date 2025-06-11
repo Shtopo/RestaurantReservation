@@ -28,6 +28,18 @@ namespace RestaurantReservation.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> PutBooking([FromBody] BookingRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(x => x.Value?.Errors.Count > 0)
+                    .Select(x => new {
+                        Field = x.Key,
+                        Errors = x.Value.Errors.Select(e => e.ErrorMessage)
+                    });
+
+                return BadRequest(errors);
+            }
+
             if (!request.BookingTime.HasValue)
                 return BadRequest("Дата бронювання обов'язкова!");
 
