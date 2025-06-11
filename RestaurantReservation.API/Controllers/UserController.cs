@@ -41,18 +41,18 @@ namespace RestaurantReservation.API.Controllers
 
         [Authorize]
         [HttpGet("GetUser")]
-        public async Task<IActionResult> GetUser([FromQuery] int userId)
+        public async Task<IActionResult> GetUser()
         {
-            var claimId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (claimId == null) return Unauthorized();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            var currentUserId = int.Parse(claimId);
+            if (userId == null)
+                return Unauthorized("Не удалось определить пользователя из токена");
 
-            if (!User.IsInRole("Admin") && currentUserId != userId)
-                return Forbid();
+            var user = await _userService.GetUserAsync(int.Parse(userId));
+            if (user == null)
+                return NotFound();
 
-            var user = await _userService.GetUserAsync(userId);
-            return user == null ? NotFound() : Ok(user);
+            return Ok(user);
         }
 
         [Authorize(Roles = "Admin")]
