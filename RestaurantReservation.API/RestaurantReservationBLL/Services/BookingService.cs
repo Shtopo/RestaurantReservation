@@ -18,6 +18,12 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
 
         public async Task<int> PutBookingAsync(string customerName, DateTime bookingTime, int tableId, int? userId)
         {
+            var tableExists = await _context.Tables.AnyAsync(t => t.Id == tableId);
+            if (!tableExists)
+            {
+                return 0;
+            }
+
             var booking = new Booking
             {
                 CustomerName = customerName,
@@ -41,7 +47,7 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
                 query = query.Where(b => b.CustomerName.Contains(customerName));
             }
 
-            return await query.ToListAsync(); 
+            return await query.ToListAsync();
         }
 
         public async Task<Booking?> GetBookingAsync(int id)

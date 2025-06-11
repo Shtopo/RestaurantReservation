@@ -84,9 +84,10 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddCors(options =>
 {
+    // Политика "AllowAll" останется, но мы сделаем ее более точной и безопасной
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://shtopo.github.io")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
