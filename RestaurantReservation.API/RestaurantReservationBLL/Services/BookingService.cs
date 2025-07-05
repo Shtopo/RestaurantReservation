@@ -36,16 +36,11 @@ namespace RestaurantReservation.API.RestaurantReservationBLL.Services
             await _context.SaveChangesAsync();
             return booking.Id;
         }
-        public async Task<List<Booking>> GetBookingsAsync(string? customerName)
+        public async Task<List<Booking>> GetBookingsAsync()
         {
             var query = _context.Bookings
                 .Include(b => b.Table)
                 .AsQueryable();
-
-            if (!string.IsNullOrEmpty(customerName))
-            {
-                query = query.Where(b => b.CustomerName.Contains(customerName));
-            }
 
             return await query.ToListAsync();
         }

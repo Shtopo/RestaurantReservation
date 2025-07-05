@@ -46,7 +46,7 @@ namespace RestaurantReservation.API.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (userId == null)
-                return Unauthorized("Не удалось определить пользователя из токена");
+                return Unauthorized("Не вдалося визначити користувача з токена");
 
             var user = await _userService.GetUserAsync(int.Parse(userId));
             if (user == null)

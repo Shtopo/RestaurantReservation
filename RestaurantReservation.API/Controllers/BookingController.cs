@@ -57,9 +57,9 @@ namespace RestaurantReservation.API.Controllers
 
         // Отримати всі бронювання
         [HttpGet ("AllBookings")]
-        public async Task<IActionResult> GetBookings([FromQuery] string? customerName)
+        public async Task<IActionResult> GetBookings()
         {
-            var bookings = await _bookingService.GetBookingsAsync(customerName);
+            var bookings = await _bookingService.GetBookingsAsync();
 
             return Ok(bookings);
         }
